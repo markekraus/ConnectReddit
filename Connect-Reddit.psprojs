@@ -1,0 +1,19 @@
+﻿<ProjectState>
+  <Version>1.0</Version>
+  <FileID>a1fb1d76-b5c9-4880-9f1c-56d47986e459</FileID>
+  <OpenFolders>
+    <Folder>Public</Folder>
+    <Folder>Account</Folder>
+    <Folder>OAuth</Folder>
+    <Folder>Application</Folder>
+    <Folder>API</Folder>
+    <Folder>Users</Folder>
+  </OpenFolders>
+  <OpenFiles>
+    <File>Users\Get-RedditUser.ps1</File>
+    <File>Connect-Reddit.psm1</File>
+    <File>API\Get-RedditApiTypeName.ps1</File>
+    <File>Connect-Reddit.psd1</File>
+    <File>Account\Get-RedditAccount.ps1</File>
+  </OpenFiles>
+</ProjectState>
