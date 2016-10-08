@@ -48,17 +48,22 @@ function Get-RedditOAuthAccessTokenURL {
                    ValueFromPipeline = $true)]
         [Parameter(ParameterSetName = 'Script')]
         [Alias('RedditApp', 'App')]
-        [pstypename('Reddit.Application')]$Application,
+        [pstypename('Reddit.Application')]
+        $Application,
+        
         [Parameter(ParameterSetName = 'Code',
                    Mandatory = $true,
                    HelpMessage = 'code retruned by the OAuth authorization request')]
         [ValidateNotNullOrEmpty()]
         [string]$Code,
+        
         [Parameter(ParameterSetName = 'Refresh',
                    Mandatory = $true,
                    ValueFromPipeline = $true)]
         [Alias('Token')]
-        [pstypename('Reddit.OAuthAccessToken')]$AccessToken,
+        [pstypename('Reddit.OAuthAccessToken')]
+        $AccessToken,
+        
         [Parameter(ParameterSetName = 'Code',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'Refresh')]

@@ -34,6 +34,7 @@ function Update-RedditOAuthAccessToken {
         [pstypename('Reddit.OAuthAccessToken')]
         [Alias('Token')]
         [System.Management.Automation.PSObject[]]$AccessToken,
+        
         [Parameter(Mandatory = $false)]
         [ValidateScript({
                 [system.uri]::IsWellFormedUriString(
@@ -41,6 +42,7 @@ function Update-RedditOAuthAccessToken {
                 )
             })]
         [string]$Url = 'https://www.reddit.com/api/v1/access_token',
+        
         [switch]$PassThru
     )
     
@@ -65,7 +67,7 @@ function Update-RedditOAuthAccessToken {
                 $ErrorMessage = $_.Exception.Message
                 Write-Error "Failed to refresh token: $ErrorMessage"
                 continue
-            }            
+            }
             $RefreshToken.TokenObject = $WebRequest.Content | ConvertFrom-Json
             $RefreshToken.Requested = $RequestTime
             $RefreshToken.Session.Headers['Authorization'] = 'bearer {0}' -f $RefreshToken.TokenObject.access_token

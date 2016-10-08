@@ -91,12 +91,15 @@ function New-RedditApplication {
         [Parameter(ParameterSetName = 'Script',
                    Mandatory = $true)]
         [switch]$Script,
+        
         [Parameter(ParameterSetName = 'WebApp',
                    Mandatory = $true)]
         [switch]$WebApp,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [switch]$InstalledApp,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'Script',
@@ -106,6 +109,7 @@ function New-RedditApplication {
         [ValidateNotNullOrEmpty()]
         [Alias('AppName')]
         [string]$Name,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'Script',
@@ -114,6 +118,7 @@ function New-RedditApplication {
                    Mandatory = $true)]
         [Alias('ClientInfo')]
         [System.Management.Automation.PSCredential]$ClientCredential,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'WebApp',
@@ -127,6 +132,7 @@ function New-RedditApplication {
             })]
         [ValidateNotNullOrEmpty()]
         [string]$RedirectUri,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'WebApp')]
@@ -134,6 +140,7 @@ function New-RedditApplication {
                    Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$UserAgent,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'Script',
@@ -142,6 +149,7 @@ function New-RedditApplication {
                    Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]$Scope,
+        
         [Parameter(ParameterSetName = 'InstalledApp',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'Script',
@@ -149,10 +157,12 @@ function New-RedditApplication {
         [Parameter(ParameterSetName = 'WebApp',
                    Mandatory = $false)]
         [string]$Description,
+        
         [Parameter(ParameterSetName = 'Script',
                    Mandatory = $true)]
         [Alias('Credential')]
         [System.Management.Automation.PSCredential]$UserCredential,
+        
         [Parameter(ParameterSetName = 'InstalledApp')]
         [Parameter(ParameterSetName = 'Script')]
         [Parameter(ParameterSetName = 'WebApp')]
@@ -184,13 +194,13 @@ function New-RedditApplication {
         $OutApplication | Add-Member -MemberType NoteProperty -Name UserCredential -Value $UserCredential
         $OutApplication | Add-Member -MemberType NoteProperty -Name RedirectUri -Value $RedirectUri
         $OutApplication | Add-Member -MemberType NoteProperty -Name Scope -Value $Scope
-        $OutApplication | Add-Member -MemberType NoteProperty -Name GUID -Value $GUID 
+        $OutApplication | Add-Member -MemberType NoteProperty -Name GUID -Value $GUID
         $OutApplication.Psobject.TypeNames.Clear()
         $OutApplication.Psobject.TypeNames.Insert(0, 'Reddit.Application')
         # Not sure this will be needed
         Write-Verbose "Registering Global variable `${$($GUID.ToString())}"
         try {
-        	New-Variable -Scope Global -Name $GUID.ToString() -Value $OutApplication -ErrorAction Stop | Out-Null
+            New-Variable -Scope Global -Name $GUID.ToString() -Value $OutApplication -ErrorAction Stop | Out-Null
         }
         catch {
             try {

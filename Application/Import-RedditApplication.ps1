@@ -33,6 +33,7 @@ function Import-RedditApplication {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]$Path,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromRemainingArguments = $true)]
@@ -43,7 +44,7 @@ function Import-RedditApplication {
     Process {
         Switch ($PsCmdlet.ParameterSetName) {
             'Path' {
-                $ImportFiles = $Path   
+                $ImportFiles = $Path
             }
             'LiteralPath' {
                 $ImportFiles = $LiteralPath
@@ -67,7 +68,7 @@ function Import-RedditApplication {
                 }
                 $OutApplication = New-RedditApplication @Params
                 Write-Output $OutApplication
-            }#End Should Process
-        }#End Foreach
-    }#End Process
-}#End Function
+            } #End Should Process
+        } #End Foreach
+    } #End Process
+} #End Function

@@ -52,11 +52,13 @@ function Export-RedditApplication {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$Path,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromRemainingArguments = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$LiterlPath,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $false,
                    ValueFromPipelineByPropertyName = $true)]
@@ -65,6 +67,7 @@ function Export-RedditApplication {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('ASCII', 'UTF8', 'UTF7', 'UTF32', 'Unicode', 'BigEndianUnicode', 'Default', 'OEM')]
         [string]$Encoding = 'Unicode',
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromPipeline = $true,
@@ -76,7 +79,7 @@ function Export-RedditApplication {
         [Alias('App', 'RedditApplication')]
         [pstypename('Reddit.Application')]
         [System.Management.Automation.PSObject]$Application
-    ) 
+    )
     
     Process {
         switch ($PsCmdlet.ParameterSetName) {

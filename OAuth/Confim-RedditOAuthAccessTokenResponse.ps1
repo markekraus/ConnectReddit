@@ -54,7 +54,7 @@ function Confirm-RedditOAuthAccessTokenResponse {
             }
             else {
                 $Message = "Uknknown error code: {0}" -f $TokenObject.error
-                Throw 
+                Throw
             }
         }
         Write-Verbose 'No error found.'
@@ -64,5 +64,5 @@ function Confirm-RedditOAuthAccessTokenResponse {
         }
         Write-verbose 'Access Token found.'
         Write-Output $True
-    }    
+    }
 }
