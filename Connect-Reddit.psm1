@@ -83,7 +83,7 @@ $RedditTypeData += @{
             MemberType = 'ScriptProperty'
             MemberName = 'RedditApiFullName'
             Value = {
-                $This | Get-RedditApiTypePrefix
+                Get-RedditApiFullname -Type $This.RedditApiTypeName -RedditId $This.Id
             }
         }
     )
