@@ -101,6 +101,73 @@ Describe 'New-RedditOAuthToken' {
             $RedditTokenWeb.psobject.typenames -contains 'Reddit.OAuthAccessToken' | Should be $true
         }
     }
+    Context "Script JSON Token"{
+        it "Creates a new Reddit.OAuthAccessToken Object"{
+            $Params = @{
+                TokenJSON = $TokenJSON
+                RefreshToken = $RefreshToken
+                Application = $RedditAppScript
+                Session = $Session
+                GUID = $TokenGUIDScript
+                Requested = $RequestDate
+                ResponseHeaders = $ResponseHeaders
+                LastRequest = $RequestDate
+            }
+            { New-RedditOAuthAccessToken @Params } | Should not throw
+            $Global:RedditTokenScript = New-RedditOAuthAccessToken @Params
+        }
+        It "Has valid AccessToken"{
+            $RedditTokenScript.AccessToken | Should be $TokenOBJECT.Access_Token
+        }
+        It "Has valid RefreshToken"{
+            $RedditTokenScript.RefreshToken | Should be $RefreshToken
+        }
+        It "Has valid TokenType"{
+            $RedditTokenScript.TokenType | Should be 'bearer'
+        }
+        It "Has valid Requested"{
+            $RedditTokenScript.Requested | Should be $RequestDate
+        }
+        It "Should not be expired"{
+            $RedditTokenScript.IsExpired | Should be $false
+        }
+        It "Has a valid Scope Count"{
+            $RedditTokenScript.ValidScope.Count | Should be $AppScope.Count
+        }
+        It "Has Valid Application" {
+            $RedditTokenScript.Application.GUID.ToString() | Should be $AppGUIDScript.ToString()
+        }
+        It "Has valid TokenObject"{
+            Compare-Object $RedditTokenScript.TokenObject $TokenOBJECT | Should be $null
+        }
+        It "Has Valid TokenJSON"{
+            $RedditTokenScript.TokenJSON | Should be $TokenJSON
+        }
+        It "Has valid Session"{
+            $RedditTokenScript.Session.UserAgent | Should be $AppUserAgent
+        }
+        It "Has Valid ResponseHeaders"{
+            $RedditTokenScript.ResponseHeaders.'x-ratelimit-remaining' | Should be $ResponseHeaders.'x-ratelimit-remaining'
+        }
+        It "Has Valid RatelimitUsed" {
+            $RedditTokenScript.RatelimitUsed | Should be $ResponseHeaders.'x-ratelimit-used'
+        }
+        It "Has Valid RateLimitRemaining" {
+            $RedditTokenScript.RateLimitRemaining | Should be $ResponseHeaders.'x-ratelimit-remaining'
+        }
+        It "Has Valid LastRequest" {
+            $RedditTokenScript.LastRequest | Should be $RequestDate
+        }
+        It "Should not be Rate limited" {
+            $RedditTokenScript.IsRateLimited | Should be $false
+        }
+        It "Has valid GUID" {
+            $RedditTokenScript.GUID.ToString() | Should be $TokenGUIDScript.ToString()
+        }
+        It "Has valid PSTypeName" {
+            $RedditTokenScript.psobject.typenames -contains 'Reddit.OAuthAccessToken' | Should be $true
+        }
+    }
 }
 
 $Global:TestsCompleted += $TestName
