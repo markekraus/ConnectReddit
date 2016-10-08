@@ -65,6 +65,9 @@ Describe 'Get-RedditAccount'{
     It 'Has valid RedditApiFullName' {
         $RedditAccount.RedditApiFullname | Should be 't2_11fmvc'
     }
+    It 'Has Valid GoldExpirationDate' {
+        $RedditAccount.GoldExpirationDate | Should be $(Get-Date '1970/1/1').addseconds(0)
+    }
 }
 
 
