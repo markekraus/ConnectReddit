@@ -86,19 +86,23 @@ function New-RedditOAuthAccessToken {
         [ValidateScript({ $_ | ConvertFrom-Json })]
         [ValidateNotNullOrEmpty()]
         [String]$TokenJSON,
+        
         [Parameter(ParameterSetName = 'PsObject',
                    Mandatory = $true)]
         [Alias('Object')]
         [System.Management.Automation.PSObject]$TokenObject,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'PsObject',
                    Mandatory = $true)]
         [System.DateTime]$Requested,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'PsObject')]
         [Microsoft.PowerShell.Commands.WebRequestSession]$Session,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'PsObject',
@@ -106,20 +110,24 @@ function New-RedditOAuthAccessToken {
         [pstypename('Reddit.Application')]
         [Alias('RedditApp', 'App')]
         [System.Management.Automation.PSObject]$Application,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'PsObject')]
         [System.Guid]$GUID = [System.Guid]::NewGuid(),
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'PsObject',
                    Mandatory = $false)]
         [System.Management.Automation.PSObject]$ResponseHeaders,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'PsObject',
                    Mandatory = $false)]
         [System.DateTime]$LastRequest = $Requested,
+        
         [Parameter(ParameterSetName = 'JSON',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'PsObject',
@@ -170,7 +178,7 @@ function New-RedditOAuthAccessToken {
         $OutToken | Add-Member -MemberType ScriptProperty -Name ValidScope -Value { $This.TokenObject.Scope -split ' ' }
         $OutToken | Add-Member -MemberType NoteProperty -Name Application -Value $Application
         $OutToken | Add-Member -MemberType NoteProperty -Name TokenObject -Value $TokenObject
-        $OutToken | Add-Member -MemberType NoteProperty -Name TokenJSON -Value $TokenJSON        
+        $OutToken | Add-Member -MemberType NoteProperty -Name TokenJSON -Value $TokenJSON
         $OutToken | Add-Member -MemberType NoteProperty -Name Session -Value $Session
         $OutToken | Add-Member -MemberType NoteProperty -Name ResponseHeaders -Value $ResponseHeaders
         $OutToken | Add-Member -MemberType ScriptProperty -Name RatelimitUsed -Value { $This.ResponseHeaders.'X-Ratelimit-Used' }
@@ -211,7 +219,7 @@ function New-RedditOAuthAccessToken {
             }
             catch {
                 Write-Warning "Unable to register Global variable."
-            }            
+            }
         }
         # Send the token object to the pipe
         Write-Output $OutToken
