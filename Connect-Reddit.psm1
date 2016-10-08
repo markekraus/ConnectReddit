@@ -14,44 +14,92 @@ Set-Variable -Scope Global -Name ConnectRedditSettings -Value $(
     }
 )
 
-# Reddit.User TypeData
-Write-Verbose 'Adding type data for Reddit.User objects'
-Write-Verbose '-Adding CreatedDate property'
-Update-TypeData -TypeName 'Reddit.User' -MemberType ScriptProperty -MemberName CreatedDate -Value {
-    $This.Created | ConvertFrom-RedditDate
-}
-Write-Verbose '-Adding CreatedUtcDate property'
-Update-TypeData -TypeName 'Reddit.User' -MemberType ScriptProperty -MemberName CreatedUtcDate -Value {
-    $This.Created_utc | ConvertFrom-RedditDate
-}
-Write-Verbose '-Adding UserUrl property'
-Update-TypeData -TypeName 'Reddit.User' -MemberType ScriptProperty -MemberName UserURL -Value {
-    $MyConnectRedditSettings = Get-Variable -Scope Global -Name ConnectRedditSettings -ValueOnly
-    "{0}{1}" -f $MyConnectRedditSettings.UserBaseUrl, $This.Name
-}
-Write-Verbose '-Adding RedditName property'
-Update-TypeData -TypeName 'Reddit.User' -MemberType ScriptProperty -MemberName RedditName -Value {
-    '/u/{0}' -f $This.name
+$RedditTypeData = @()
+$RedditTypeData += @{
+    Name = 'Reddit.User'
+    Properties = @(
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'CreatedDate'
+            Value = {
+                $This.Created | ConvertFrom-RedditDate
+            }
+        }
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'CreatedUtcDate'
+            Value = {
+                $This.Created_utc | ConvertFrom-RedditDate
+            }
+        }
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'UserURL'
+            Value = {
+                "{0}{1}" -f $global:ConnectRedditSettings.UserBaseUrl, $This.Name
+            }
+        }
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'RedditName'
+            Value = {
+                '/u/{0}' -f $This.name
+            }
+        }
+    )
 }
 
-# Reddit.Account TypeData
-Write-Verbose 'Adding type data for Reddit.Account objects'
-Write-Verbose '-Adding CreatedDate property'
-Update-TypeData -TypeName 'Reddit.Account' -MemberType ScriptProperty -MemberName SuspensionExpirationUtcDate -Value {
-    $This.suspension_expiration_utc | ConvertFrom-RedditDate
+$RedditTypeData += @{
+    Name = 'Reddit.Account'
+    Properties = @(
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'SuspensionExpirationUtcDate'
+            Value = {
+                $This.suspension_expiration_utc | ConvertFrom-RedditDate
+            }
+        }
+    )
 }
 
-# Reddit.Object TypeData
-Write-Verbose 'Adding Type data for Reddit.Object'
-Write-Verbose '-Adding RedditApiTypeName property'
-Update-TypeData -TypeName 'Reddit.Object' -MemberType ScriptProperty -MemberName RedditApiTypeName -Value {
-    $This | Get-RedditApiTypeName
+$RedditTypeData += @{
+    Name = 'Reddit.Object'
+    Properties = @(
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'RedditApiTypeName'
+            Value = {
+                $This | Get-RedditApiTypeName
+            }
+        }
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'RedditApiTypePrefix'
+            Value = {
+                $This | Get-RedditApiTypePrefix
+            }
+        }
+        @{
+            MemberType = 'ScriptProperty'
+            MemberName = 'RedditApiFullName'
+            Value = {
+                $This | Get-RedditApiTypePrefix
+            }
+        }
+    )
 }
-Write-Verbose '-Adding RedditApiTypePrefix property'
-Update-TypeData -TypeName 'Reddit.Object' -MemberType ScriptProperty -MemberName RedditApiTypePrefix -Value {
-    $This | Get-RedditApiTypePrefix
-}
-Write-Verbose '-Adding RedditApiTypePrefix property'
-Update-TypeData -TypeName 'Reddit.Object' -MemberType ScriptProperty -MemberName RedditApiFullName -Value {
-    Get-RedditApiFullname -Type $This.RedditApiTypeName -RedditId $This.Id
+
+Foreach ($RedditType in $RedditTypeData) {
+    Write-Verbose "Adding $($RedditType.Name)"
+    foreach ($ObjectProperty in $RedditType.Properties) {
+        Write-Verbose "-Adding $($ObjectProperty.MemberName) property"
+        $Params = @{
+            TypeName = $RedditType.Name
+            MemberType = $ObjectProperty.MemberType
+            MemberName = $ObjectProperty.MemberName
+            Value = $ObjectProperty.Value
+            ErrorAction = 'SilentlyContinue'
+        }
+        Update-TypeData @Params
+    }
 }
