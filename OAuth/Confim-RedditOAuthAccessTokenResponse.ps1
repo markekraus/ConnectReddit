@@ -26,7 +26,8 @@ function Confirm-RedditOAuthAccessTokenResponse {
         [Parameter(Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [Microsoft.PowerShell.Commands.HtmlWebResponseObject]$Response
+        [pstypename('Microsoft.PowerShell.Commands.HtmlWebResponseObject')]
+        [System.Management.Automation.PSObject]$Response
     )
     Begin {
         # https://github.com/reddit/reddit/wiki/OAuth2#retrieving-the-access-token
