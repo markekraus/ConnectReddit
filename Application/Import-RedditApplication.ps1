@@ -45,21 +45,24 @@ function Import-RedditApplication {
         Switch ($PsCmdlet.ParameterSetName) {
             'Path' {
                 $ImportFiles = $Path
+                $ImportParam = 'Path'
             }
             'LiteralPath' {
                 $ImportFiles = $LiteralPath
+                $ImportParam = 'LiteralPath'
             }
         }
-        foreach ($ImportFile in $InportFiles) {
+        foreach ($ImportFile in $ImportFiles) {
             if ($pscmdlet.ShouldProcess($ImportFile)) {
                 $Params = @{
-                    "$PsCmdlet.ParameterSetName" = $ImportFile
+                    "$ImportParam" = $ImportFile
                 }
                 $InObject = Import-Clixml @Params
                 $Params = @{
                     "$($InObject.Type)" = $True
                     Name = $InObject.Name
-                    ClientCredential = $InObject.ClienCredential
+                    ClientCredential = $InObject.ClientCredential
+                    UserCredential = $InObject.UserCredential
                     RedirectUri = $InObject.RedirectUri
                     Scope = $InObject.Scope
                     UserAgent = $InObject.UserAgent
