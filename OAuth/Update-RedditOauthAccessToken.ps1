@@ -1,4 +1,5 @@
-﻿<#
+﻿
+<#
     .SYNOPSIS
         Refreshes an expired Reddit Oauth Token
     
@@ -11,8 +12,14 @@
     .PARAMETER Url
         A description of the Url parameter.
     
+    .PARAMETER Force
+        By default, a Token will not be renewed if it is not expired. Using force will update the token even if it is not expired.
+    
     .PARAMETER PassThru
         Indicates that the cmdlet sends items from the interactive window down the pipeline as input to other commands. By default, this cmdlet does not generate any output.
+    
+    .PARAMETER param5
+        A description of the param5 parameter.
     
     .EXAMPLE
         PS C:\> $RedditToken = $RedditToken | Update-RedditOAuthAccessToken
@@ -43,12 +50,19 @@ function Update-RedditOAuthAccessToken {
             })]
         [string]$Url = 'https://www.reddit.com/api/v1/access_token',
         
+        [switch]$Force,
+        
         [switch]$PassThru
+
     )
     
     process {
         Foreach ($RefreshToken in $AccessToken) {
             Write-Verbose "Processing token '$($RefreshToken.GUID.ToString())'"
+            If (!$AccessToken.isExpired -and !$Force) {
+                Write-Verbose "Token is not expired. Skipping"
+                Continue
+            }
             $RefreshURL = Get-RedditOAuthAccessTokenURL -Url $Url -AccessToken $RefreshToken
             Write-Verbose "RefreshURL: $RefreshURL"
             $RefreshToken.Session.Headers['Authorization'] = Get-RedditOAuthAuthorizationHeader -AccessToken $RefreshToken
