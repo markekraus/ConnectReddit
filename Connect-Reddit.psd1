@@ -4,7 +4,7 @@
 	ModuleToProcess = 'Connect-Reddit.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0.33'
+	ModuleVersion = '1.0.0.35'
 	
 	# ID used to uniquely identify this module
 	GUID = 'a1fb1d76-b5c9-4880-9f1c-56d47986e459'
@@ -71,7 +71,7 @@
         'Application\Import-RedditApplication.ps1'
         'Application\New-RedditApplication.ps1'
         # OAuth
-        'OAuth\Confim-RedditOAuthAccessTokenResponse.ps1'
+        'OAuth\Confirm-RedditOAuthAccessTokenResponse.ps1'
         'OAuth\Export-RedditOAuthAccessToken.ps1'
         'OAuth\Get-RedditOAuthAccessToken.ps1'
         'OAuth\Get-RedditOAuthAccessTokenURL.ps1'
@@ -103,7 +103,7 @@
         'Import-RedditApplication'
         'New-RedditApplication'
         # OAuth
-        'Confim-RedditOAuthAccessTokenResponse'
+        'Confirm-RedditOAuthAccessTokenResponse'
         'Export-RedditOAuthAccessToken'
         'Get-RedditOAuthAccessToken'
         'Get-RedditOAuthAccessTokenURL'
