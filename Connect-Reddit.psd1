@@ -4,7 +4,7 @@
 	ModuleToProcess = 'Connect-Reddit.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0.35'
+	ModuleVersion = '1.0.0.36'
 	
 	# ID used to uniquely identify this module
 	GUID = 'a1fb1d76-b5c9-4880-9f1c-56d47986e459'
