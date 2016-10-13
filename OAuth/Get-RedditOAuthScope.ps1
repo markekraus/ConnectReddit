@@ -36,23 +36,23 @@ function Get-RedditOAuthScope {
     
     Write-Verbose "Retrieving Scopes from '$ScopeURL'"
     $ScopesObj = Invoke-WebRequest -Uri $ScopeURL |
-    Select-Object -ExcludeProperty Content |
-    ConvertFrom-Json
+        Select-Object -ExpandProperty Content |
+            ConvertFrom-Json
     
     Write-Verbose "Enumerating scopes."
-    $Properties = $ScopesObj | Get-Member -MemberType Properties |
-    Select-Object -ExpandProperty Name
+    $Properties = $ScopesObj |
+        Get-Member -MemberType Properties |
+            Select-Object -ExpandProperty Name
     
     Write-Verbose "Looping through each scope and return ID, Name, and Description properties."
     foreach ($Property in $Properties) {
         Write-Verbose "Processing '$Property'"
-        $OutObjProps = [ordered]@{
+        $OutObj = [pscustomobject][ordered]@{
             Scope = $Property
             Id = $ScopesObj.$Property.id
             Name = $ScopesObj.$Property.Name
             Description = $ScopesObj.$Property.Description
         }
-        $OutObj = New-Object System.Management.Automation.PSObject -Property $OutObjProps
         $OutObj.Psobject.TypeNames.Clear()
         $OutObj.Psobject.TypeNames.Insert(0, 'Reddit.Scope')
         Write-Output $OutObj
