@@ -26,7 +26,8 @@ function Confirm-RedditOAuthAccessTokenResponse {
         [Parameter(Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [Microsoft.PowerShell.Commands.HtmlWebResponseObject]$Response
+        [pstypename('Microsoft.PowerShell.Commands.HtmlWebResponseObject')]
+        [System.Management.Automation.PSObject]$Response
     )
     Begin {
         # https://github.com/reddit/reddit/wiki/OAuth2#retrieving-the-access-token
@@ -44,7 +45,12 @@ function Confirm-RedditOAuthAccessTokenResponse {
         }
         Write-Verbose 'Client credentials ok.'
         Write-Verbose 'Converting Content to Object'
-        $TokenObject = $Response.Content | ConvertFrom-Json
+        try {
+            $TokenObject = $Response.Content | ConvertFrom-Json -ErrorAction Stop
+        }
+        catch {
+            Throw 'Response does not contain valid JSON Object'
+        }
         Write-Verbose 'Checking if error present'
         if ($TokenObject.error) {
             Write-Output $false
@@ -54,15 +60,16 @@ function Confirm-RedditOAuthAccessTokenResponse {
             }
             else {
                 $Message = "Uknknown error code: {0}" -f $TokenObject.error
-                Throw 
+                Throw $Message
             }
         }
         Write-Verbose 'No error found.'
         Write-Verbose 'Verifying Access Token was retruned.'
         if (!$TokenObject.access_token) {
             $Message = "access_token not found. response: {0}" -f $($TokenObject | ConvertTo-Json -Compress)
+            Throw $Message
         }
         Write-verbose 'Access Token found.'
         Write-Output $True
-    }    
+    }
 }

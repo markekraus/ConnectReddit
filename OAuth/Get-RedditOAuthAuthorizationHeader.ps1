@@ -53,22 +53,26 @@ function Get-RedditOAuthAuthorizationHeader {
                    Mandatory = $true)]
         [Alias('User')]
         [string]$UserName,
+        
         [Parameter(ParameterSetName = 'Plaintext',
                    Mandatory = $true)]
         [Alias('Pass')]
         [string]$Password,
+        
         [Parameter(ParameterSetName = 'ClientCredential',
                    Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
         [Alias('Credential')]
         [System.Management.Automation.PSCredential]$ClientCredential,
+        
         [Parameter(ParameterSetName = 'Application',
                    Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
         [pstypename('Reddit.Application')]
         [System.Management.Automation.PSObject]$Application,
+        
         [Parameter(ParameterSetName = 'AccessToken',
                    Mandatory = $true,
                    ValueFromPipeline = $true,

@@ -35,37 +35,42 @@
 
 #>
 function Get-RedditOAuthAppAuthorizationURL {
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
-	param
-	(
-		[Parameter(Mandatory = $true,
-				   ValueFromPipeline = $true)]
-		[Alias('RedditApp', 'App')]
-		[pstypename('Reddit.Application')]$Application,
-		[Parameter(Mandatory = $false)]
-		[string]$State = [guid]::NewGuid(),
-		[Parameter(Mandatory = $false)]
-		[string]$AuthURL = 'https://www.reddit.com/api/v1/authorize',
-		[Parameter(Mandatory = $false)]
-		[ValidateSet('code', 'token')]
-		[Alias('response_type')]
-		[string]$ResponseType = 'code',
-		[Parameter(Mandatory = $false)]
-		[ValidateSet('permanent', 'temporary')]
-		[string]$Duration = 'permanent'
-	)
+    [CmdletBinding(ConfirmImpact = 'None',
+                   SupportsShouldProcess = $true)]
+    [OutputType([string])]
+    param
+    (
+        [Parameter(Mandatory = $true,
+                   ValueFromPipeline = $true)]
+        [Alias('RedditApp', 'App')]
+        [pstypename('Reddit.Application')]
+        $Application,
+        
+        [Parameter(Mandatory = $false)]
+        [string]$State = [guid]::NewGuid(),
+        
+        [Parameter(Mandatory = $false)]
+        [string]$AuthURL = 'https://www.reddit.com/api/v1/authorize',
+        
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('code', 'token')]
+        [Alias('response_type')]
+        [string]$ResponseType = 'code',
+        
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('permanent', 'temporary')]
+        [string]$Duration = 'permanent'
+    )
     
-    process {        
+    process {
         Write-Verbose "Building Query String."
-        $Query = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)		
-		$Query['client_id'] = $Application.ClientId
-		$Query['response_type'] = $ResponseType
-		$Query['state'] = $State
-		$Query['redirect_uri'] = $Application.RedirectUri
-		$Query['duration'] = $Duration
-		$Query['scope'] = $Application.Scope -Join ','
+        $Query = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
+        $Query['client_id'] = $Application.ClientId
+        $Query['response_type'] = $ResponseType
+        $Query['state'] = $State
+        $Query['redirect_uri'] = $Application.RedirectUri
+        $Query['duration'] = $Duration
+        $Query['scope'] = $Application.Scope -Join ','
         
         Write-Verbose "Create Url Object for parsing with Url Builder."
         $UrlObj = [System.Uri]$AuthUrl
@@ -83,5 +88,5 @@ function Get-RedditOAuthAppAuthorizationURL {
         
         Write-Verbose "Write the constructed URL to output."
         Write-Output $URLBuilder.ToString()
-	}
+    }
 }

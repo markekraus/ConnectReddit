@@ -33,6 +33,7 @@ function Import-RedditApplication {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string[]]$Path,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromRemainingArguments = $true)]
@@ -43,22 +44,25 @@ function Import-RedditApplication {
     Process {
         Switch ($PsCmdlet.ParameterSetName) {
             'Path' {
-                $ImportFiles = $Path   
+                $ImportFiles = $Path
+                $ImportParam = 'Path'
             }
             'LiteralPath' {
                 $ImportFiles = $LiteralPath
+                $ImportParam = 'LiteralPath'
             }
         }
-        foreach ($ImportFile in $InportFiles) {
+        foreach ($ImportFile in $ImportFiles) {
             if ($pscmdlet.ShouldProcess($ImportFile)) {
                 $Params = @{
-                    "$PsCmdlet.ParameterSetName" = $ImportFile
+                    "$ImportParam" = $ImportFile
                 }
                 $InObject = Import-Clixml @Params
                 $Params = @{
                     "$($InObject.Type)" = $True
                     Name = $InObject.Name
-                    ClientCredential = $InObject.ClienCredential
+                    ClientCredential = $InObject.ClientCredential
+                    UserCredential = $InObject.UserCredential
                     RedirectUri = $InObject.RedirectUri
                     Scope = $InObject.Scope
                     UserAgent = $InObject.UserAgent
@@ -67,7 +71,7 @@ function Import-RedditApplication {
                 }
                 $OutApplication = New-RedditApplication @Params
                 Write-Output $OutApplication
-            }#End Should Process
-        }#End Foreach
-    }#End Process
-}#End Function
+            } #End Should Process
+        } #End Foreach
+    } #End Process
+} #End Function

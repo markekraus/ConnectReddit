@@ -53,11 +53,13 @@ function Export-RedditOAuthAccessToken {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$Path,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromRemainingArguments = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$LiterlPath,
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $false,
                    ValueFromPipelineByPropertyName = $true)]
@@ -66,6 +68,7 @@ function Export-RedditOAuthAccessToken {
                    ValueFromPipelineByPropertyName = $true)]
         [ValidateSet('ASCII', 'UTF8', 'UTF7', 'UTF32', 'Unicode', 'BigEndianUnicode', 'Default', 'OEM')]
         [string]$Encoding = 'Unicode',
+        
         [Parameter(ParameterSetName = 'LiteralPath',
                    Mandatory = $true,
                    ValueFromPipeline = $true,

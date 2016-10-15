@@ -44,10 +44,10 @@
     
     .NOTES
         For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-        https://github.com/reddit/reddit/wiki/API
-        https://github.com/reddit/reddit/wiki/OAuth2
-        https://www.reddit.com/prefs/apps
-        https://www.reddit.com/wiki/api
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditApiResponse {
     [CmdletBinding(DefaultParameterSetName = 'GET')]
@@ -118,26 +118,11 @@ function Get-RedditApiResponse {
     
     process {
         # Attempt to update the Token if it has expired
-        if ($AccessToken.isExpired) {
-            try {
-                Write-Verbose 'Updateing expired Access Token.'
-                $AccessToken | Update-RedditOAuthAccessToken -ErrorAction Stop
-            }
-            catch {
-                $ErrorMessage = $_.Exception.Message
-                $Message = 'Attempted to refreshe expired certificate and failed: {0}' -f $ErrorMessage
-                Write-Error $Message
-                Return
-            }
-        }
+        $AccessToken | Update-RedditOAuthAccessToken 
+         
         # Take a nap if a rate limit is in effect
-        if ($AccessToken.IsRatelimited) {
-            $Message = 'Rate limit in effect until {0}. Sleeping.' -f $AccessToken.RatelimitReset
-            Write-Warning $Message
-            while ($AccessToken.IsRatelimited) {
-                Start-Sleep -Seconds 1
-            }
-        }
+        $AccessToken | Wait-RedditOAuthAccessTokenRatelimitExpiration
+        
         $ApiUri = $($ApiBaseUrl -replace '/$', '') + '/' + $($ApiEndPoint -replace '^/', '')
         Write-Verbose "API Uri: $ApiUri"
         # Paramters hash for the Invoke-WebRequest. 

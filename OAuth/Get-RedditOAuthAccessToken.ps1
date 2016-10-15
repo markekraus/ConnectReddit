@@ -42,11 +42,13 @@ function Get-RedditOAuthAccessToken {
         [Alias('RedditApp', 'App')]
         [pstypename('Reddit.Application')]
         [System.Management.Automation.PSObject]$Application,
+        
         [Parameter(ParameterSetName = 'Code',
                    Mandatory = $true,
                    HelpMessage = 'code retruned by the OAuth authorization request')]
         [ValidateNotNullOrEmpty()]
         [string]$Code,
+        
         [Parameter(ParameterSetName = 'Code',
                    Mandatory = $false)]
         [Parameter(ParameterSetName = 'Script')]
@@ -86,7 +88,7 @@ function Get-RedditOAuthAccessToken {
             Method = 'POST'
             ErrorAction = 'Stop'
         }
-        $RequestTime = Get-Date        
+        $RequestTime = Get-Date
         try {
             $WebRequest = Invoke-WebRequest @Params
             $WebRequest | Confirm-RedditOAuthAccessTokenResponse | Out-Null
