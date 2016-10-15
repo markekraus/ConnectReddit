@@ -6,10 +6,12 @@ Set-Variable -Scope Global -Name ConnectRedditSettings -Value $(
         ApiTypeNameMapping = [pscustomobject]@{
             'Reddit.User' = 'Account'
             'Reddit.Account' = 'Account'
+            'Reddit.Friend' = 'Account'
         }
         ApiTypePrefixMapping = [pscustomobject]@{
             'Reddit.User' = 't2'
             'Reddit.Account' = 't2'
+            'Reddit.Friend' = 't2'
         }
     }
 )

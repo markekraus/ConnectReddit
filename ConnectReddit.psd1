@@ -4,7 +4,7 @@
 	ModuleToProcess = 'ConnectReddit.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.1.3'
+	ModuleVersion = '1.0.1.4'
 	
 	# ID used to uniquely identify this module
 	GUID = 'a1fb1d76-b5c9-4880-9f1c-56d47986e459'
@@ -62,6 +62,7 @@
         # Account
         'Account\Get-RedditAccount.ps1'
         'Account\Get-RedditAccountKarma.ps1'
+        'Account\Get-RedditAccountFriends.ps1'
         # API
         'API\Get-RedditApiResponse.ps1'
         'API\Get-RedditApiFullname.ps1'
@@ -95,6 +96,7 @@
         # Account
         'Get-RedditAccount'
         'Get-RedditAccountKarma'
+        'Get-RedditAccountFriends'
         # API
         'Get-RedditApiResponse'
         'Get-RedditApiFullname'
