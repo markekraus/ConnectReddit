@@ -1,5 +1,4 @@
-﻿$TestName = Split-Path -Path $PSCommandPath -Leaf
-$TestsRequired = @()
+﻿$TestsRequired = @()
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
@@ -17,4 +16,4 @@ InModuleScope 'Connect-Reddit' {
     }
 }
 
-$Global:TestsCompleted += $TestName
+$Global:TestsCompleted += Split-Path -Path $MyInvocation.MyCommand.Definition -Leaf

@@ -1,5 +1,4 @@
-﻿$TestName = Split-Path -Path $PSCommandPath -Leaf
-$TestsRequired = @('Test-Export-RedditApplication.ps1')
+﻿$TestsRequired = @('Test-Export-RedditApplication.ps1')
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
@@ -36,4 +35,4 @@ Describe 'Import-RedditApplication' {
     }
 }
 
-$Global:TestsCompleted += $TestName
+$Global:TestsCompleted += Split-Path -Path $MyInvocation.MyCommand.Definition -Leaf

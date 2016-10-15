@@ -1,5 +1,4 @@
-﻿$TestName = Split-Path -Path $PSCommandPath -Leaf
-$TestsRequired = @('Test-New-RedditOAuthAccessToken.ps1')
+﻿$TestsRequired = @('Test-New-RedditOAuthAccessToken.ps1')
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
@@ -47,4 +46,4 @@ Describe 'Get-RedditApiResponse' {
     }
 }
 
-$Global:TestsCompleted += $TestName
+$Global:TestsCompleted += Split-Path -Path $MyInvocation.MyCommand.Definition -Leaf

@@ -1,5 +1,4 @@
-﻿$TestName = Split-Path -Path $PSCommandPath -Leaf
-$TestsRequired = @('Test-New-RedditApplication.ps1')
+﻿$TestsRequired = @('Test-New-RedditApplication.ps1')
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
@@ -34,6 +33,9 @@ $ResponseHeaders = @{
 }
 
 Describe 'New-RedditOAuthToken' {
+    Mock -CommandName Get-RedditAccount -MockWith {
+        return 'Get-RedditAccount'
+    }
     Context "WebbApp JSON Token"{
         it "Creates a new Reddit.OAuthAccessToken Object"{
             $Params = @{
@@ -99,6 +101,9 @@ Describe 'New-RedditOAuthToken' {
         }
         It "Has valid PSTypeName" {
             $RedditTokenWeb.psobject.typenames -contains 'Reddit.OAuthAccessToken' | Should be $true
+        }
+        It "Has valid UserContext" {
+            $RedditTokenWeb.UserContext| Should Be 'Get-RedditAccount'
         }
     }
     Context "Script JSON Token"{
@@ -167,7 +172,10 @@ Describe 'New-RedditOAuthToken' {
         It "Has valid PSTypeName" {
             $RedditTokenScript.psobject.typenames -contains 'Reddit.OAuthAccessToken' | Should be $true
         }
+        It "Has valid UserContext" {
+            $RedditTokenScript.UserContext | Should Be 'Get-RedditAccount'
+        }
     }
 }
 
-$Global:TestsCompleted += $TestName
+$Global:TestsCompleted += Split-Path -Path $MyInvocation.MyCommand.Definition -Leaf
