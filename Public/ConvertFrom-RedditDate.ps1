@@ -26,7 +26,7 @@ function ConvertFrom-RedditDate {
                    HelpMessage = 'Reddit Date (Unix Epoch)')]
         [AllowNull()]
         [Alias('Date')]
-        [float[]]$RedditDate
+        [double[]]$RedditDate
     )
     
     begin {
