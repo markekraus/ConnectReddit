@@ -9,7 +9,6 @@ $TestFolder = Join-Path -Path $PSScriptRoot -ChildPath 'Tests'
 $TestScripts = Get-ChildItem -Path $TestFolder -Filter 'Test-*.ps1' -Recurse
 Foreach ($TestScript in $TestScripts) {
     if ($TestScript.Name -notin $TestsCompleted) {
-        Write-Host "Running tests from '$($TestScript.FullName)'"
         . $TestScript.FullName
     }
 }

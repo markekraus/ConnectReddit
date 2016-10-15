@@ -2,11 +2,11 @@
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
-        Write-Host "Running tests from '$($RequiredTestScript.FullName)'"
         . $RequiredTestScript.FullName
     }
 }
 
+Write-Host "Running tests from '$($MyInvocation.MyCommand.Definition)'"
 Describe 'Get-RedditApiResponse' {
     Mock -CommandName Update-RedditOAuthAccessToken -ModuleName ConnectReddit -MockWith { }
     Mock -CommandName Wait-RedditOAuthAccessTokenRatelimitExpiration -ModuleName ConnectReddit -MockWith { }
