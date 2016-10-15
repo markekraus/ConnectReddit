@@ -1,5 +1,5 @@
 ﻿#Explicitly import the module for testing
-Import-Module 'Connect-Reddit' -Verbose
+Import-Module 'ConnectReddit' -Verbose
 
 $Global:TestsCompleted = @()
 #This directory is used for Import/Export tests
