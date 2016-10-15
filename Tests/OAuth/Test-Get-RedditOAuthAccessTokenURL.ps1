@@ -7,7 +7,7 @@ foreach ($TestRequired in $TestsRequired) {
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditOAuthAccessTokenURL' {
         It 'Returns a Code URL' {
             $Url = Get-RedditOAuthAccessTokenURL -Application $Global:RedditAppWeb -Code '12345abcde'

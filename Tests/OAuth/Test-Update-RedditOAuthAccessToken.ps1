@@ -10,7 +10,7 @@ foreach ($TestRequired in $TestsRequired) {
 Describe 'Update-RedditOAuthAccessToken'{
     $Global:UpdateRedditToken = $Global:RedditTokenWeb.Psobject.Copy()
     $PreviousRequested = $Global:UpdateRedditToken.Requested.psobject.copy()
-    Mock -CommandName Invoke-WebRequest -ModuleName Connect-Reddit -MockWith {
+    Mock -CommandName Invoke-WebRequest -ModuleName ConnectReddit -MockWith {
         $OutObject = [pscustomobject] @{
             StatusCode = 200
             SatusDescription = 'OK'
@@ -34,7 +34,7 @@ Describe 'Update-RedditOAuthAccessToken'{
         $OutObject.psobject.typenames.insert(0, 'Microsoft.PowerShell.Commands.HtmlWebResponseObject')
         Return $OutObject
     }
-    Mock -CommandName 'Confirm-RedditOAuthAccessTokenResponse' -ModuleName Connect-Reddit -MockWith { return $True }
+    Mock -CommandName 'Confirm-RedditOAuthAccessTokenResponse' -ModuleName ConnectReddit -MockWith { return $True }
     It 'Should not have errors' {
         { $Global:UpdateRedditToken| Update-RedditOAuthAccessToken -Force -ErrorAction Stop } | Should Not Throw
     }

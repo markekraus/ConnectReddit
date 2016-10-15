@@ -8,9 +8,9 @@ foreach ($TestRequired in $TestsRequired) {
 }
 
 Describe 'Get-RedditApiResponse' {
-    Mock -CommandName Update-RedditOAuthAccessToken -ModuleName Connect-Reddit -MockWith { }
-    Mock -CommandName Wait-RedditOAuthAccessTokenRatelimitExpiration -ModuleName Connect-Reddit -MockWith { }
-    Mock -CommandName Invoke-WebRequest -ModuleName Connect-Reddit -MockWith {
+    Mock -CommandName Update-RedditOAuthAccessToken -ModuleName ConnectReddit -MockWith { }
+    Mock -CommandName Wait-RedditOAuthAccessTokenRatelimitExpiration -ModuleName ConnectReddit -MockWith { }
+    Mock -CommandName Invoke-WebRequest -ModuleName ConnectReddit -MockWith {
         return [pscustomobject] @{
             StatusCode = 200
             SatusDescription = 'OK'

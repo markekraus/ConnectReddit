@@ -8,7 +8,7 @@ foreach ($TestRequired in $TestsRequired) {
 }
 
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditUser' {
         $TargetUser = 'markekraus'
         Mock Get-RedditApiResponse -MockWith {

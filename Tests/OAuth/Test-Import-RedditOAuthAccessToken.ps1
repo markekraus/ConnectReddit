@@ -7,7 +7,7 @@ foreach ($TestRequired in $TestsRequired) {
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'Import-RedditOAuthAccessToken' {
         if ($Global:TestExportsDirectory) {
             $TestExportsDirectory = $Global:TestExportsDirectory

@@ -7,7 +7,7 @@ foreach ($TestRequired in $TestsRequired) {
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditOAuthAppAuthorizationURL' {
         It 'Returns a Code authorization URL' {
             $Params = @{

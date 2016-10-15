@@ -9,7 +9,7 @@ foreach ($TestRequired in $TestsRequired) {
 
 
 Describe 'Get-RedditOAuthAccessToken' {
-    Mock -CommandName Invoke-WebRequest -ModuleName Connect-Reddit -MockWith {
+    Mock -CommandName Invoke-WebRequest -ModuleName ConnectReddit -MockWith {
         $OutObject = [pscustomobject] @{
             StatusCode = 200
             SatusDescription = 'OK'
@@ -36,9 +36,9 @@ Describe 'Get-RedditOAuthAccessToken' {
         New-Variable -Scope Script -Name 'Session' -Value $SessionObj
         Return $OutObject
     }
-    Mock -CommandName Confirm-RedditOAuthAccessTokenResponse -ModuleName Connect-Reddit
-    Mock -CommandName Get-RedditOAuthAccessTokenURL -ModuleName Connect-Reddit {Return 'http://127.0.0.1/'}
-    Mock -CommandName Get-RedditOAuthAuthorizationHeader -ModuleName Connect-Reddit
+    Mock -CommandName Confirm-RedditOAuthAccessTokenResponse -ModuleName ConnectReddit
+    Mock -CommandName Get-RedditOAuthAccessTokenURL -ModuleName ConnectReddit {Return 'http://127.0.0.1/'}
+    Mock -CommandName Get-RedditOAuthAuthorizationHeader -ModuleName ConnectReddit
     It 'Does not have errors' {
         {
             $Params = @{

@@ -7,7 +7,7 @@ foreach ($TestRequired in $TestsRequired) {
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'ConvertTo-RedditDate' {
         It 'Converts a DateTime to UNIX Epoch' {
             Get-Date '09/11/2001 15:45:00' | ConvertTo-RedditDate | Should Be 1000223100

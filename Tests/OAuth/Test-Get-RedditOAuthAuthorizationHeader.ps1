@@ -7,7 +7,7 @@ foreach ($TestRequired in $TestsRequired) {
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditOAuthAuthorizationHeader' {
         It 'Returns an Auhtorzation header for a plain text user/password' {
             $Param = @{

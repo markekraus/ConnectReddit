@@ -8,9 +8,9 @@ foreach ($TestRequired in $TestsRequired) {
 }
 
 Describe 'Get-RedditAccount'{
-    Mock -CommandName Get-RedditApiResponse -ModuleName Connect-Reddit -MockWith {
+    Mock -CommandName Get-RedditApiResponse -ModuleName ConnectReddit -MockWith {
         $OutObject = [pscustomobject]@{
-            "name" = "connect-reddit"
+            "name" = "Connect-Reddit"
             "created" = 1473998069.0
             "is_suspended" = $false
             "created_utc" =  1473969269.0
