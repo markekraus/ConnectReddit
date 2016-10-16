@@ -1,35 +1,36 @@
 ﻿<#
-	.SYNOPSIS
-		Retrieves an OAuth Access Token
-	
-	.DESCRIPTION
-		Submits a OAUth2 Access Token Request to Reddit and retruns a token object used by other cmdlets for autthenticated Reddit API calls.
-	
-	.PARAMETER Application
-		Reddit Application created with New-RedditApplication
-	
-	.PARAMETER Code
-		The one-time use code that may be exchanged for a bearer token. This is provided in the OAuth Authorzation Response.
-	
-	.PARAMETER Url
-		API Endpoint URL To retrieve the OAUth token from. This is not required and is included only for compatibility with Reddit clones.
-	
-	.EXAMPLE
-		PS C:\> $RedditToken = Get-RedditOAuthAccessToken -Code '86thkqvjsvj` -Application $RedditApp
-	
-	.OUTPUTS
-		System.Management.Automation.PSCredential
-	
-	.NOTES
-		For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-		https://github.com/reddit/reddit/wiki/API
-		https://github.com/reddit/reddit/wiki/OAuth2
-		https://www.reddit.com/prefs/apps
-		https://www.reddit.com/wiki/api
+    .SYNOPSIS
+        Retrieves an OAuth Access Token
+    
+    .DESCRIPTION
+        Submits a OAUth2 Access Token Request to Reddit and retruns a token object used by other cmdlets for autthenticated Reddit API calls.
+    
+    .PARAMETER Application
+        Reddit Application created with New-RedditApplication
+    
+    .PARAMETER Code
+        The one-time use code that may be exchanged for a bearer token. This is provided in the OAuth Authorzation Response.
+    
+    .PARAMETER Url
+        API Endpoint URL To retrieve the OAUth token from. This is not required and is included only for compatibility with Reddit clones.
+    
+    .EXAMPLE
+        PS C:\> $RedditToken = Get-RedditOAuthAccessToken -Code '86thkqvjsvj` -Application $RedditApp
+    
+    .OUTPUTS
+        System.Management.Automation.PSCredential
+    
+    .NOTES
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+        https://github.com/reddit/reddit/wiki/API
+        https://github.com/reddit/reddit/wiki/OAuth2
+        https://www.reddit.com/prefs/apps
+        https://www.reddit.com/wiki/api
 #>
 function Get-RedditOAuthAccessToken {
     [CmdletBinding(DefaultParameterSetName = 'Script',
                    ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditOAuthAccessToken',
                    SupportsShouldProcess = $false)]
     [OutputType([System.Management.Automation.PSCredential])]
     param
@@ -39,8 +40,8 @@ function Get-RedditOAuthAccessToken {
                    ValueFromPipeline = $true)]
         [Parameter(ParameterSetName = 'Script',
                    Mandatory = $true)]
-        [Alias('RedditApp', 'App')]
         [pstypename('Reddit.Application')]
+        [Alias('RedditApp', 'App')]
         [System.Management.Automation.PSObject]$Application,
         
         [Parameter(ParameterSetName = 'Code',

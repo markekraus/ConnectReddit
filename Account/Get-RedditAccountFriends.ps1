@@ -30,6 +30,7 @@
 #>
 function Get-RedditAccountFriends {
     [CmdletBinding(ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditAccountFriends',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     param

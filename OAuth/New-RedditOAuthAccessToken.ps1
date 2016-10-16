@@ -75,7 +75,8 @@
 #>
 function New-RedditOAuthAccessToken {
     [CmdletBinding(DefaultParameterSetName = 'JSON',
-                   ConfirmImpact = 'None')]
+                   ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/New%E2%80%90RedditOAuthAccessToken')]
     [OutputType([System.Management.Automation.PSObject])]
     param
     (
@@ -83,8 +84,8 @@ function New-RedditOAuthAccessToken {
                    Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [ValidateScript({ $_ | ConvertFrom-Json })]
         [ValidateNotNullOrEmpty()]
+        [ValidateScript({ $_ | ConvertFrom-Json })]
         [String]$TokenJSON,
         
         [Parameter(ParameterSetName = 'PsObject',
@@ -166,7 +167,7 @@ function New-RedditOAuthAccessToken {
             ResponseHeaders = $ResponseHeaders
             LastRequest = $LastRequest
             GUID = $GUID
-        } 
+        }
         Write-Verbose 'Setting custom type name to Reddit.OAuthAccessToken'
         $OutToken.Psobject.TypeNames.Clear()
         # See /Types/Reddit.OAuthAccessToken.ps1 for the magic

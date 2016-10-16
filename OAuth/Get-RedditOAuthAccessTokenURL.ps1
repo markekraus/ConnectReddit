@@ -1,44 +1,45 @@
 ﻿<#
-	.SYNOPSIS
-		Generates an OAuth Access AccessToken URL
-	
-	.DESCRIPTION
-		Generates an OAuth Access AccessToken URL. This is primarily used by other functions in this module but is provided for those who wish to manually retrieve OAuth tokens.
-	
-	.PARAMETER Application
-		Reddit Application object created by New-RedditApplication
-	
-	.PARAMETER Code
-		The one-time use code that may be exchanged for a bearer AccessToken. This is provided in the OAuth Response. See https://github.com/reddit/reddit/wiki/OAuth2#allowing-the-user-to-authorize-your-application
-	
-	.PARAMETER AccessToken
-		Reddit OAuth Access AccessToken object created by Get-RedditOAuthAccessToken
-	
-	.PARAMETER Url
-		API Endpoint URL To retrieve the OAUth AccessToken from. This is not required and is included only for compatibility with Reddit clones.
-	
-	.EXAMPLE
-		PS C:\> Get-RedditOAuthAccessTokenURL -Application $RedditApplication -Code '12345abcde'
-	
-	.EXAMPLE
-		PS C:\> Get-RedditOAuthAccessTokenURL -AccessToken $RedditToken
-	
-	.EXAMPLE
-		PS C:\> Get-RedditOAuthAccessTokenURL -Application $RedditScriptApp
-	
-	.OUTPUTS
-		System.String
-	
-	.NOTES
-		For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-		https://github.com/reddit/reddit/wiki/API
-		https://github.com/reddit/reddit/wiki/OAuth2
-		https://www.reddit.com/prefs/apps
-		https://www.reddit.com/wiki/api
+    .SYNOPSIS
+        Generates an OAuth Access AccessToken URL
+    
+    .DESCRIPTION
+        Generates an OAuth Access AccessToken URL. This is primarily used by other functions in this module but is provided for those who wish to manually retrieve OAuth tokens.
+    
+    .PARAMETER Application
+        Reddit Application object created by New-RedditApplication
+    
+    .PARAMETER Code
+        The one-time use code that may be exchanged for a bearer AccessToken. This is provided in the OAuth Response. See https://github.com/reddit/reddit/wiki/OAuth2#allowing-the-user-to-authorize-your-application
+    
+    .PARAMETER AccessToken
+        Reddit OAuth Access AccessToken object created by Get-RedditOAuthAccessToken
+    
+    .PARAMETER Url
+        API Endpoint URL To retrieve the OAUth AccessToken from. This is not required and is included only for compatibility with Reddit clones.
+    
+    .EXAMPLE
+        PS C:\> Get-RedditOAuthAccessTokenURL -Application $RedditApplication -Code '12345abcde'
+    
+    .EXAMPLE
+        PS C:\> Get-RedditOAuthAccessTokenURL -AccessToken $RedditToken
+    
+    .EXAMPLE
+        PS C:\> Get-RedditOAuthAccessTokenURL -Application $RedditScriptApp
+    
+    .OUTPUTS
+        System.String
+    
+    .NOTES
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditOAuthAccessTokenURL {
     [CmdletBinding(DefaultParameterSetName = 'Script',
                    ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditOAuthAccessTokenURL',
                    SupportsShouldProcess = $true)]
     [OutputType([System.String])]
     param
@@ -47,8 +48,8 @@ function Get-RedditOAuthAccessTokenURL {
                    Mandatory = $true,
                    ValueFromPipeline = $true)]
         [Parameter(ParameterSetName = 'Script')]
-        [Alias('RedditApp', 'App')]
         [pstypename('Reddit.Application')]
+        [Alias('RedditApp', 'App')]
         $Application,
         
         [Parameter(ParameterSetName = 'Code',
@@ -60,8 +61,8 @@ function Get-RedditOAuthAccessTokenURL {
         [Parameter(ParameterSetName = 'Refresh',
                    Mandatory = $true,
                    ValueFromPipeline = $true)]
-        [Alias('Token')]
         [pstypename('Reddit.OAuthAccessToken')]
+        [Alias('Token')]
         $AccessToken,
         
         [Parameter(ParameterSetName = 'Code',

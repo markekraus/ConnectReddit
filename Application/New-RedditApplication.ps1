@@ -75,14 +75,15 @@
     
     .NOTES
         For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-        https://github.com/reddit/reddit/wiki/API
-        https://github.com/reddit/reddit/wiki/OAuth2
-        https://www.reddit.com/prefs/apps
-        https://www.reddit.com/wiki/api
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function New-RedditApplication {
     [CmdletBinding(DefaultParameterSetName = 'WebApp',
-                   ConfirmImpact = 'None')]
+                   ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/New%E2%80%90RedditApplication')]
     [OutputType([System.Management.Automation.PSObject])]
     param
     (
@@ -123,12 +124,12 @@ function New-RedditApplication {
                    Mandatory = $true)]
         [Parameter(ParameterSetName = 'Script',
                    Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
         [ValidateScript({
                 [system.uri]::IsWellFormedUriString(
                     $_, [System.UriKind]::Absolute
                 )
             })]
+        [ValidateNotNullOrEmpty()]
         [string]$RedirectUri,
         
         [Parameter(ParameterSetName = 'InstalledApp',

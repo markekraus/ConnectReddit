@@ -4,7 +4,7 @@
 	ModuleToProcess = 'ConnectReddit.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.1.4'
+	ModuleVersion = '1.0.1.5'
 	
 	# ID used to uniquely identify this module
 	GUID = 'a1fb1d76-b5c9-4880-9f1c-56d47986e459'
@@ -162,8 +162,10 @@
 			# ReleaseNotes = ''
 			
 		} # End of PSData hashtable
-		
-	} # End of PrivateData hashtable
+        
+    } # End of PrivateData hashtable
+    
+    HelpInfoURI = 'https://github.com/markekraus/ConnectReddit/wiki'
 }
 
 

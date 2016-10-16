@@ -14,7 +14,7 @@
     .PARAMETER APIEndPoint
         The API endpoint that will be accessed. This is provided for use with Reddit clones.
         Default:
-            /api/v1/me/karma
+        /api/v1/me/karma
     
     .PARAMETER UserBaseUrl
         The Base URL for user account. The default is https://www.reddit.com/u/. This is used to construct the user URL and is provided for use with Reddit clones.
@@ -30,6 +30,7 @@
 #>
 function Get-RedditAccountKarma {
     [CmdletBinding(ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditAccountKarma',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     param

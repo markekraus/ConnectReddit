@@ -44,13 +44,15 @@
     
     .NOTES
         For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-            https://github.com/reddit/reddit/wiki/API
-            https://github.com/reddit/reddit/wiki/OAuth2
-            https://www.reddit.com/prefs/apps
-            https://www.reddit.com/wiki/api
+        https://github.com/reddit/reddit/wiki/API
+        https://github.com/reddit/reddit/wiki/OAuth2
+        https://www.reddit.com/prefs/apps
+        https://www.reddit.com/wiki/api
 #>
 function Get-RedditApiResponse {
-    [CmdletBinding(DefaultParameterSetName = 'GET')]
+    [CmdletBinding(DefaultParameterSetName = 'GET',
+                   ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditApiResponse')]
     [OutputType([System.Management.Automation.PSObject])]
     param
     (
@@ -118,8 +120,8 @@ function Get-RedditApiResponse {
     
     process {
         # Attempt to update the Token if it has expired
-        $AccessToken | Update-RedditOAuthAccessToken 
-         
+        $AccessToken | Update-RedditOAuthAccessToken
+        
         # Take a nap if a rate limit is in effect
         $AccessToken | Wait-RedditOAuthAccessTokenRatelimitExpiration
         

@@ -41,11 +41,9 @@
             https://www.reddit.com/wiki/api
 #>
 function Get-RedditOAuthAuthorizationHeader {
-    [CmdletBinding(ConfirmImpact = 'None')]
-    [OutputType([System.String], ParameterSetName = 'AccessToken')]
-    [OutputType([System.String], ParameterSetName = 'Application')]
-    [OutputType([System.String], ParameterSetName = 'Plaintext')]
-    [OutputType([System.String], ParameterSetName = 'ClientCredential')]
+    [CmdletBinding(DefaultParameterSetName = 'AccessToken',
+                   ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditOAuthAuthorizationHeader')]
     [OutputType([System.String])]
     param
     (
