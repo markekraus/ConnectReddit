@@ -9,7 +9,7 @@
         Reddit OAuth Access Token Response  object from Invoke-WebRequest
     
     .EXAMPLE
-        		PS C:\> Confirm-RedditOAuthAccessTokenResponse -Response $Response
+        PS C:\> Confirm-RedditOAuthAccessTokenResponse -Response $Response
     
     .NOTES
         For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
@@ -19,7 +19,8 @@
             https://www.reddit.com/wiki/api
 #>
 function Confirm-RedditOAuthAccessTokenResponse {
-    [CmdletBinding(ConfirmImpact = 'None')]
+    [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Confirm%E2%80%90RedditOAuthAccessTokenResponse')]
     [OutputType([bool])]
     param
     (
@@ -29,6 +30,7 @@ function Confirm-RedditOAuthAccessTokenResponse {
         [pstypename('Microsoft.PowerShell.Commands.HtmlWebResponseObject')]
         [System.Management.Automation.PSObject]$Response
     )
+    
     Begin {
         # https://github.com/reddit/reddit/wiki/OAuth2#retrieving-the-access-token
         $ErrorCodes = @{

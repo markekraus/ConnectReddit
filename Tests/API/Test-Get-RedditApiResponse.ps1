@@ -2,15 +2,15 @@
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
-        Write-Host "Running tests from '$($RequiredTestScript.FullName)'"
         . $RequiredTestScript.FullName
     }
 }
 
+Write-Host "Running tests from '$($MyInvocation.MyCommand.Definition)'"
 Describe 'Get-RedditApiResponse' {
-    Mock -CommandName Update-RedditOAuthAccessToken -ModuleName Connect-Reddit -MockWith { }
-    Mock -CommandName Wait-RedditOAuthAccessTokenRatelimitExpiration -ModuleName Connect-Reddit -MockWith { }
-    Mock -CommandName Invoke-WebRequest -ModuleName Connect-Reddit -MockWith {
+    Mock -CommandName Update-RedditOAuthAccessToken -ModuleName ConnectReddit -MockWith { }
+    Mock -CommandName Wait-RedditOAuthAccessTokenRatelimitExpiration -ModuleName ConnectReddit -MockWith { }
+    Mock -CommandName Invoke-WebRequest -ModuleName ConnectReddit -MockWith {
         return [pscustomobject] @{
             StatusCode = 200
             SatusDescription = 'OK'

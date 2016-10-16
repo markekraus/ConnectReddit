@@ -37,12 +37,14 @@
     .NOTES
         This is an Export-Clixml wrapper.
         See Import-RedditApplication for importing exported Reddit Application Objects
+    
     .LINK
         Import-RedditApplication
 #>
 function Export-RedditApplication {
     [CmdletBinding(DefaultParameterSetName = 'Path',
                    ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Export%E2%80%90RedditApplication',
                    SupportsShouldProcess = $true)]
     [OutputType([System.IO.FileInfo])]
     param
@@ -76,8 +78,8 @@ function Export-RedditApplication {
                    Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [Alias('App', 'RedditApplication')]
         [pstypename('Reddit.Application')]
+        [Alias('App', 'RedditApplication')]
         [System.Management.Automation.PSObject]$Application
     )
     

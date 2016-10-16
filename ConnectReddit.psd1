@@ -1,10 +1,10 @@
 ﻿@{
 	
 	# Script module or binary module file associated with this manifest
-	ModuleToProcess = 'Connect-Reddit.psm1'
+	ModuleToProcess = 'ConnectReddit.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.1.0'
+	ModuleVersion = '1.0.1.5'
 	
 	# ID used to uniquely identify this module
 	GUID = 'a1fb1d76-b5c9-4880-9f1c-56d47986e459'
@@ -61,6 +61,8 @@
     NestedModules = @(
         # Account
         'Account\Get-RedditAccount.ps1'
+        'Account\Get-RedditAccountKarma.ps1'
+        'Account\Get-RedditAccountFriends.ps1'
         # API
         'API\Get-RedditApiResponse.ps1'
         'API\Get-RedditApiFullname.ps1'
@@ -93,6 +95,8 @@
     FunctionsToExport = @(
         # Account
         'Get-RedditAccount'
+        'Get-RedditAccountKarma'
+        'Get-RedditAccountFriends'
         # API
         'Get-RedditApiResponse'
         'Get-RedditApiFullname'
@@ -158,8 +162,10 @@
 			# ReleaseNotes = ''
 			
 		} # End of PSData hashtable
-		
-	} # End of PrivateData hashtable
+        
+    } # End of PrivateData hashtable
+    
+    HelpInfoURI = 'https://github.com/markekraus/ConnectReddit/wiki'
 }
 
 

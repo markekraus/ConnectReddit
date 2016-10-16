@@ -15,6 +15,8 @@
     
     .PARAMETER APIEndPoint
         The API endpoint that will be accessed. This is provided for use with Reddit clones.
+        Default:
+        /api/v1/me
     
     .EXAMPLE
         PS C:\> Get-RedditAccount -AccessToken $value1
@@ -23,15 +25,15 @@
         Additional information about the function.
 #>
 function Get-RedditAccount {
-    [CmdletBinding()]
+    [CmdletBinding(HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditAccount')]
     [OutputType([System.Management.Automation.PSObject])]
     param
     (
         [Parameter(Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [Alias('Token')]
         [pstypename('Reddit.OAuthAccessToken')]
+        [Alias('Token')]
         [System.Management.Automation.PSObject]$AccessToken,
         
         [Parameter(Mandatory = $false)]

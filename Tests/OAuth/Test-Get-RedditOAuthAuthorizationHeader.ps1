@@ -2,12 +2,12 @@
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
-        Write-Host "Running tests from '$($RequiredTestScript.FullName)'"
         . $RequiredTestScript.FullName
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+Write-Host "Running tests from '$($MyInvocation.MyCommand.Definition)'"
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditOAuthAuthorizationHeader' {
         It 'Returns an Auhtorzation header for a plain text user/password' {
             $Param = @{

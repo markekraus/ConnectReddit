@@ -12,9 +12,9 @@
     .PARAMETER Username
         The reddit username to be queried.
         Examples:
-        /u/markekraus
-        u/markekraus
-        markekraus
+            /u/markekraus
+            u/markekraus
+            markekraus
     
     .PARAMETER APIBaseURL
         This is the base URL of the API endpoint. This is provided for use with Reddit clones.
@@ -22,7 +22,7 @@
     .PARAMETER APIEndPoint
         The API endpoint that will be accessed. This is provided for use with Reddit clones. Use {0} to indicate the username.
         Default:
-        /api/{0}/about
+            /api/{0}/about
     
     .PARAMETER UserBaseUrl
         The Base URL for user account. The default is https://www.reddit.com/u/. This is used to construct the user URL and is provided for use with Reddit clones.
@@ -37,10 +37,15 @@
         System.Management.Automation.PSObject
     
     .NOTES
-        Additional information about the function.
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditUser {
     [CmdletBinding(ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditUser',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     param
