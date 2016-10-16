@@ -1,4 +1,5 @@
 ﻿#Explicitly import the module for testing
+Remove-Module 'ConnectReddit' -ErrorAction SilentlyContinue -Force
 Import-Module 'ConnectReddit' -Verbose
 
 $Global:TestsCompleted = @()
