@@ -1,7 +1,6 @@
-﻿
-<#
+﻿<#
     .SYNOPSIS
-        Refreshes an expired Reddit Oauth Token
+        Refreshes aReddit Oauth Access Token
     
     .DESCRIPTION
         Requests a refresh of the Reddit OAuth Access Token from Reddit.
@@ -10,16 +9,14 @@
         Reddit OAUth Access Token Object created by Get-RedditOAuthAccessToken.
     
     .PARAMETER Url
-        A description of the Url parameter.
+        Url for the OAuth Submission end point. Defaults to 'https://www.reddit.com/api/v1/access_token'.
+        Provided for compatibility with reddit clones.
     
     .PARAMETER Force
         By default, a Token will not be renewed if it is not expired. Using force will update the token even if it is not expired.
     
     .PARAMETER PassThru
-        Indicates that the cmdlet sends items from the interactive window down the pipeline as input to other commands. By default, this cmdlet does not generate any output.
-    
-    .PARAMETER param5
-        A description of the param5 parameter.
+        Indicates that the cmdlet sends items from the interactive window down the pipeline as input to other commands. By default, this cmdlet does not generate any output.    
     
     .EXAMPLE
         PS C:\> $RedditToken = $RedditToken | Update-RedditOAuthAccessToken
@@ -28,10 +25,15 @@
         Reddit.OAuthAccessToken
     
     .NOTES
-        Additional information about the function.
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Update-RedditOAuthAccessToken {
-    [CmdletBinding(ConfirmImpact = 'Low')]
+    [CmdletBinding(ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Update%E2%80%90RedditOAuthAccessToken')]
     [OutputType([System.Management.Automation.PSObject])]
     param
     (
@@ -53,7 +55,6 @@ function Update-RedditOAuthAccessToken {
         [switch]$Force,
         
         [switch]$PassThru
-
     )
     
     process {

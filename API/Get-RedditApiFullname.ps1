@@ -37,7 +37,8 @@
         https://www.reddit.com/wiki/api
 #>
 function Get-RedditApiFullname {
-    [CmdletBinding(ConfirmImpact = 'None')]
+    [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditApiFullname')]
     [OutputType([System.String])]
     param
     (

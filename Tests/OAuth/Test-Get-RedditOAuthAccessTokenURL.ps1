@@ -2,12 +2,12 @@
 foreach ($TestRequired in $TestsRequired) {
     if ($TestRequired -notin $Global:TestsCompleted) {
         $RequiredTestScript = Get-ChildItem -Recurse -Path ..\ -Filter $TestRequired
-        Write-Host "Running tests from '$($RequiredTestScript.FullName)'"
         . $RequiredTestScript.FullName
     }
 }
 
-InModuleScope 'Connect-Reddit' {
+Write-Host "Running tests from '$($MyInvocation.MyCommand.Definition)'"
+InModuleScope 'ConnectReddit' {
     Describe 'Get-RedditOAuthAccessTokenURL' {
         It 'Returns a Code URL' {
             $Url = Get-RedditOAuthAccessTokenURL -Application $Global:RedditAppWeb -Code '12345abcde'

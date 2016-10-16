@@ -16,13 +16,14 @@
     
     .NOTES
         See Export-RedditOauthAccessToken for exporting Reddit AcessToken Objects
-
+    
     .LINK
         Export-RedditOauthAccessToken
 #>
 function Import-RedditOAuthAccessToken {
     [CmdletBinding(DefaultParameterSetName = 'Path',
                    ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Import%E2%80%90RedditOAuthAccessToken',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     param

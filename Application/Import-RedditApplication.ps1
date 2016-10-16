@@ -12,17 +12,18 @@
         Specifies the XML files where the Reddit Application Object was exported. Unlike Path, the value of the LiteralPath parameter is used exactly as it is typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose it in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any characters as escape sequences.
     
     .EXAMPLE
-        		PS C:\> $RedditApp = Import-RedditApplication -Path 'c:\RedditApp.xml'
+        PS C:\> $RedditApp = Import-RedditApplication -Path 'c:\RedditApp.xml'
     
     .NOTES
         See Export-RedditApplication for exporting Redit Application Objects
-
+    
     .LINK
         Export-RedditApplication
 #>
 function Import-RedditApplication {
     [CmdletBinding(DefaultParameterSetName = 'Path',
                    ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Import%E2%80%90RedditApplication',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
     param

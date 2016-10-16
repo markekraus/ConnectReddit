@@ -15,7 +15,8 @@
         This is used pruimarily by the Reddit.Object RedditApiTypeName attribute
 #>
 function Get-RedditApiTypeName {
-    [CmdletBinding(ConfirmImpact = 'None')]
+    [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditApiTypeName')]
     [OutputType([System.String])]
     param
     (

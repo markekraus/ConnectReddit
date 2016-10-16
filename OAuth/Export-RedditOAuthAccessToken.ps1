@@ -37,13 +37,14 @@
     .NOTES
         This is an Export-Clixml wrapper.
         See Import-RedditOauthAccessToken for importing exported Reddit AcessToken Objects
-
+    
     .LINK
         Import-RedditOauthAccessToken
 #>
 function Export-RedditOAuthAccessToken {
     [CmdletBinding(DefaultParameterSetName = 'Path',
                    ConfirmImpact = 'Low',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Export%E2%80%90RedditOAuthAccessToken',
                    SupportsShouldProcess = $true)]
     [OutputType([System.IO.FileInfo])]
     param
@@ -77,8 +78,8 @@ function Export-RedditOAuthAccessToken {
                    Mandatory = $true,
                    ValueFromPipeline = $true,
                    ValueFromPipelineByPropertyName = $true)]
-        [Alias('Token')]
         [pstypename('Reddit.OAuthAccessToken')]
+        [Alias('Token')]
         [System.Management.Automation.PSObject]$AcessToken
     )
     

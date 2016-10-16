@@ -12,7 +12,7 @@
         Maximum number of seconds to sleep. If this is lower than the number of seconds until the end of the ratelimit period, then the sleep period will end before the ratelimit period has ended. The default is 900 seconds (15 minutes).
     
     .EXAMPLE
-        		PS C:\> Wait-RedditOAuthAccessTokenRatelimitExpiration -AccessToken $RedditToken
+        PS C:\> Wait-RedditOAuthAccessTokenRatelimitExpiration -AccessToken $RedditToken
     
     .NOTES
         For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
@@ -22,7 +22,8 @@
             https://www.reddit.com/wiki/api
 #>
 function Wait-RedditOAuthAccessTokenRatelimitExpiration {
-    [CmdletBinding(ConfirmImpact = 'None')]
+    [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Wait%E2%80%90RedditOAuthAccessTokenRatelimitExpiration')]
     param
     (
         [Parameter(Mandatory = $true,
@@ -33,6 +34,7 @@ function Wait-RedditOAuthAccessTokenRatelimitExpiration {
         
         [int32]$MaxSleepSeconds = 900
     )
+    
     begin {
         $MaxSleepDate = (Get-date).AddSeconds($MaxSleepSeconds)
     }
@@ -45,6 +47,6 @@ function Wait-RedditOAuthAccessTokenRatelimitExpiration {
         Write-Warning $Message
         while ($AccessToken.IsRatelimited -and (Get-Date) -lt $MaxSleepDate) {
             Start-Sleep -Seconds 1
-        }        
-    }   
+        }
+    }
 }

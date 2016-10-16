@@ -1,5 +1,5 @@
 ﻿#Explicitly import the module for testing
-Import-Module 'Connect-Reddit' -Verbose
+Import-Module 'ConnectReddit' -Verbose
 
 $Global:TestsCompleted = @()
 #This directory is used for Import/Export tests
@@ -9,7 +9,6 @@ $TestFolder = Join-Path -Path $PSScriptRoot -ChildPath 'Tests'
 $TestScripts = Get-ChildItem -Path $TestFolder -Filter 'Test-*.ps1' -Recurse
 Foreach ($TestScript in $TestScripts) {
     if ($TestScript.Name -notin $TestsCompleted) {
-        Write-Host "Running tests from '$($TestScript.FullName)'"
         . $TestScript.FullName
     }
 }

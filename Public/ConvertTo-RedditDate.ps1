@@ -11,9 +11,16 @@
     .EXAMPLE
         PS C:\> ConvertTo-RedditDate -Date $RedditDate
     
+    .NOTES
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function ConvertTo-RedditDate {
-    [CmdletBinding(ConfirmImpact = 'None')]
+    [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/ConvertTo%E2%80%90RedditDate')]
     [OutputType([System.String])]
     param
     (
@@ -22,6 +29,7 @@ function ConvertTo-RedditDate {
                    ValueFromPipelineByPropertyName = $true)]
         [DateTime[]]$Date
     )
+    
     begin {
         $UnixEpoch = Get-Date '1970/1/1'
     }

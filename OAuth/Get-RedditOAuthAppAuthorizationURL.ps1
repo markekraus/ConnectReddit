@@ -1,49 +1,49 @@
 ﻿<#
-	.SYNOPSIS
-		Gets a URL to authorize a reddit APP.
-	
-	.DESCRIPTION
-		Generated a URL baed on the Client ID, OAuth Scope, and Redirect URI to be used by a user to authorized an App.
-	
-	.PARAMETER Application
-		Reddit Application Object created by New-RedditApplication
-	
-	.PARAMETER State
-		State is an string defined by the application. A new GUID will be generated if no State is provided.
-	
-	.PARAMETER AuthURL
-		Reddit OAuth Authorization URL. Dfeault is  'https://www.reddit.com/api/v1/authorize' . Parameter added for support with Reddit clones, but is not neccesary for Reddit Apps.
-	
-	.PARAMETER ResponseType
-		Can be either Code or Token. Use Code for Web Apps and Token for Installed apps (https://github.com/reddit/reddit/wiki/OAuth2)
-	
-	.PARAMETER Duration
-		Indicates whether or not your app needs a permanent or temporary token. The implicit grant flow does not allow permanent tokens. (https://github.com/reddit/reddit/wiki/OAuth2)
-	
-	.EXAMPLE
-		PS C:\> $AuthURL = Get-RedditAppAuthorzationURL -Application $Reddit -State $GUID -ResponseType Code
-	
-	.OUTPUTS
-		System.String
-	
-	.NOTES
-		For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
-			https://github.com/reddit/reddit/wiki/API
-			https://github.com/reddit/reddit/wiki/OAuth2
-			https://www.reddit.com/prefs/apps
-			https://www.reddit.com/wiki/api
-
+    .SYNOPSIS
+        Gets a URL to authorize a reddit APP.
+    
+    .DESCRIPTION
+        Generated a URL baed on the Client ID, OAuth Scope, and Redirect URI to be used by a user to authorized an App.
+    
+    .PARAMETER Application
+        Reddit Application Object created by New-RedditApplication
+    
+    .PARAMETER State
+        State is an string defined by the application. A new GUID will be generated if no State is provided.
+    
+    .PARAMETER AuthURL
+        Reddit OAuth Authorization URL. Dfeault is  'https://www.reddit.com/api/v1/authorize' . Parameter added for support with Reddit clones, but is not neccesary for Reddit Apps.
+    
+    .PARAMETER ResponseType
+        Can be either Code or Token. Use Code for Web Apps and Token for Installed apps (https://github.com/reddit/reddit/wiki/OAuth2)
+    
+    .PARAMETER Duration
+        Indicates whether or not your app needs a permanent or temporary token. The implicit grant flow does not allow permanent tokens. (https://github.com/reddit/reddit/wiki/OAuth2)
+    
+    .EXAMPLE
+        PS C:\> $AuthURL = Get-RedditAppAuthorzationURL -Application $Reddit -State $GUID -ResponseType Code
+    
+    .OUTPUTS
+        System.String
+    
+    .NOTES
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditOAuthAppAuthorizationURL {
     [CmdletBinding(ConfirmImpact = 'None',
+                   HelpUri = 'https://github.com/markekraus/ConnectReddit/wiki/Get%E2%80%90RedditOAuthAppAuthorizationURL',
                    SupportsShouldProcess = $true)]
     [OutputType([string])]
     param
     (
         [Parameter(Mandatory = $true,
                    ValueFromPipeline = $true)]
-        [Alias('RedditApp', 'App')]
         [pstypename('Reddit.Application')]
+        [Alias('RedditApp', 'App')]
         $Application,
         
         [Parameter(Mandatory = $false)]
