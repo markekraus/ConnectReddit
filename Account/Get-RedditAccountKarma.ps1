@@ -1,9 +1,9 @@
 ﻿<#
     .SYNOPSIS
-        Synopsis
+        Retrieves a Karam breakdown for the User
     
     .DESCRIPTION
-        Description
+        Returns a a list of Reddit.KarmaList objects with a break down of the link and comment karma per subreddit for the user the Access Token is issued.
     
     .PARAMETER AccessToken
         Reddit OAuth Access Token returned from Get-RedditOAuthAccessToken
@@ -12,15 +12,15 @@
         This is the base URL of the API endpoint. This is provided for use with Reddit clones.
     
     .PARAMETER APIEndPoint
-        The API endpoint that will be accessed. This is provided for use with Reddit clones. 
+        The API endpoint that will be accessed. This is provided for use with Reddit clones.
         Default:
-         /api/v1/me/karma
+            /api/v1/me/karma
     
     .PARAMETER UserBaseUrl
         The Base URL for user account. The default is https://www.reddit.com/u/. This is used to construct the user URL and is provided for use with Reddit clones.
     
     .EXAMPLE
-        PS C:\> Get-RedditAccountKarma-AccessToken $RedditToken 
+        PS C:\> Get-RedditAccountKarma-AccessToken $RedditToken
     
     .OUTPUTS
         System.Management.Automation.PSObject
@@ -28,7 +28,7 @@
     .NOTES
         Additional information about the function.
 #>
-function Get-RedditAccountKarma{
+function Get-RedditAccountKarma {
     [CmdletBinding(ConfirmImpact = 'Low',
                    SupportsShouldProcess = $true)]
     [OutputType([System.Management.Automation.PSObject])]
@@ -46,6 +46,7 @@ function Get-RedditAccountKarma{
         
         [string]$ApiEndPoint = '/api/v1/me/karma'
     )
+    
     Begin {
         Write-Verbose "Defining Typenames"
         $PsTypnames = @(
@@ -56,7 +57,7 @@ function Get-RedditAccountKarma{
         # Support Should Process
         if (-not $PSCmdlet.ShouldProcess('')) {
             Continue
-        }        
+        }
         $Params = @{
             Get = $true
             AccessToken = $AccessToken
@@ -64,7 +65,7 @@ function Get-RedditAccountKarma{
             ApiEndPoint = $ApiEndPoint
         }
         try {
-            $Response = Get-RedditApiResponse @Params                
+            $Response = Get-RedditApiResponse @Params
         }
         catch {
             $ErrorMessage = $_.Exception.Message
@@ -78,6 +79,6 @@ function Get-RedditAccountKarma{
                 $ResponseObject.Psobject.TypeNames.add($PsTypname)
             }
             Write-Output $ResponseObject
-        }        
+        }
     }
 }

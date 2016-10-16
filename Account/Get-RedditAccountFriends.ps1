@@ -1,9 +1,9 @@
 ﻿<#
     .SYNOPSIS
-        Synopsis
+        Retrieves the Friends list of the User
     
     .DESCRIPTION
-        Description
+        Returns a list of Reddit.Friends objects for the friends of the account the access token is issued for.
     
     .PARAMETER AccessToken
         Reddit OAuth Access Token returned from Get-RedditOAuthAccessToken
@@ -12,15 +12,15 @@
         This is the base URL of the API endpoint. This is provided for use with Reddit clones.
     
     .PARAMETER APIEndPoint
-        The API endpoint that will be accessed. This is provided for use with Reddit clones. 
+        The API endpoint that will be accessed. This is provided for use with Reddit clones.
         Default:
-         /api/v1/me/friends
+            /api/v1/me/friends
     
     .PARAMETER UserBaseUrl
         The Base URL for user account. The default is https://www.reddit.com/u/. This is used to construct the user URL and is provided for use with Reddit clones.
     
     .EXAMPLE
-        PS C:\> Get-RedditAccountFriends -AccessToken $RedditToken 
+        PS C:\> Get-RedditAccountFriends -AccessToken $RedditToken
     
     .OUTPUTS
         System.Management.Automation.PSObject
@@ -46,6 +46,7 @@ function Get-RedditAccountFriends {
         
         [string]$ApiEndPoint = '/api/v1/me/friends'
     )
+    
     Begin {
         #These are the Pstypenames that will be applied to the output objects
         $PsTypnames = @(
@@ -65,7 +66,7 @@ function Get-RedditAccountFriends {
             ApiEndPoint = $ApiEndPoint
         }
         try {
-            $Response = Get-RedditApiResponse @Params                
+            $Response = Get-RedditApiResponse @Params
         }
         catch {
             $ErrorMessage = $_.Exception.Message
@@ -79,6 +80,6 @@ function Get-RedditAccountFriends {
                 $ResponseObject.Psobject.TypeNames.add($PsTypname)
             }
             Write-Output $ResponseObject
-        } 
+        }
     }
 }
