@@ -26,7 +26,11 @@
         System.Management.Automation.PSObject
     
     .NOTES
-        Additional information about the function.
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditAccountFriends {
     [CmdletBinding(ConfirmImpact = 'Low',

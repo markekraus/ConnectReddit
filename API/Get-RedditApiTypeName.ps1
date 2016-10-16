@@ -12,7 +12,11 @@
         PS C:\> Get-RedditApiTypeName -RedditObject $RedditUser
     
     .NOTES
-        This is used pruimarily by the Reddit.Object RedditApiTypeName attribute
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
 #>
 function Get-RedditApiTypeName {
     [CmdletBinding(ConfirmImpact = 'None',

@@ -16,6 +16,11 @@
     
     .NOTES
         See Export-RedditApplication for exporting Redit Application Objects
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
     
     .LINK
         Export-RedditApplication

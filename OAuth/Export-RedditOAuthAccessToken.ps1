@@ -37,6 +37,11 @@
     .NOTES
         This is an Export-Clixml wrapper.
         See Import-RedditOauthAccessToken for importing exported Reddit AcessToken Objects
+        For more information about registering Reddit Apps, Reddit's API, or Reddit OAuth see:
+            https://github.com/reddit/reddit/wiki/API
+            https://github.com/reddit/reddit/wiki/OAuth2
+            https://www.reddit.com/prefs/apps
+            https://www.reddit.com/wiki/api
     
     .LINK
         Import-RedditOauthAccessToken
